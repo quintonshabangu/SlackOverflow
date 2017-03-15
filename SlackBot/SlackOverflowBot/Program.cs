@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Castle.Windsor;
 using MargieBot;
 using MargieBot.Responders;
-using YodaSlackBot.DI;
+using SlackOverflowBot.DI;
 
-namespace YodaSlackBot
+namespace SlackOverflowBot
 {
     public class Program
     {

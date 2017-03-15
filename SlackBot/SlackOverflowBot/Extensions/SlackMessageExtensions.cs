@@ -1,8 +1,8 @@
 ﻿using MargieBot.Models;
 using ServiceStack.Text;
-using YodaSlackBot.Models;
+using SlackOverflowBot.Models;
 
-namespace YodaSlackBot.Extensions
+namespace SlackOverflowBot.Extensions
 {
     public static class SlackMessageExtensions
     {

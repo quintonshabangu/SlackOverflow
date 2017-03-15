@@ -7,7 +7,7 @@ using API.DI;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 
-namespace YodaSlackBot.DI
+namespace SlackOverflowBot.DI
 {
     public static class BotRunnerBootstrapper
     {

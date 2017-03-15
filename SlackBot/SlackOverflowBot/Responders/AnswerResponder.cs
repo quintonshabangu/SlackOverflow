@@ -13,7 +13,7 @@ using Newtonsoft.Json;
 using System.Net;
 using Newtonsoft.Json.Linq;
 
-namespace YodaSlackBot.Responders
+namespace SlackOverflowBot.Responders
 {
     public class AnswerResponder : IResponder
     {

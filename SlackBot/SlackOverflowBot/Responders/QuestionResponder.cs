@@ -13,7 +13,7 @@ using API.ChatApi;
 using API.Models;
 using System.Net;
 
-namespace YodaSlackBot.Responders
+namespace SlackOverflowBot.Responders
 {
     public class QuestionResponder : IResponder
     {
