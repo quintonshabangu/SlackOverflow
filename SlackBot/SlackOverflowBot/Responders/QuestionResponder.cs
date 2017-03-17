@@ -17,12 +17,12 @@ namespace SlackOverflowBot.Responders
 {
     public class QuestionResponder : IResponder
     {
-        private readonly IWebAPi webApi;
+        private readonly IWebApi webApi;
         private readonly IChatApi chatApi;
 
         public QuestionResponder(IChatApi chatApi)
         {
-            webApi = new WebApi();
+            webApi = new WebApi(ConfigurationManager.AppSettings["SlackOverflowWeb"]);
             this.chatApi = chatApi;
         }
 

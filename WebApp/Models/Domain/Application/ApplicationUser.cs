@@ -37,5 +37,10 @@ namespace WebApp.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public void AddUserPoints(int Points)
+        {
+            this.Points = this.Points + Points;
+        }
     }
 }

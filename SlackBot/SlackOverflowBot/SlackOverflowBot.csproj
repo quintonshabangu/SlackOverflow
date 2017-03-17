@@ -90,6 +90,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responders\AnswerResponder.cs" />
     <Compile Include="Responders\QuestionResponder.cs" />
+    <Compile Include="Responders\ReactionResponder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

@@ -3,10 +3,12 @@ using System;
 
 namespace API.WebApi
 {
-    public interface IWebAPi
+    public interface IWebApi
     {
         SavePostResponseModel SaveQuestion(Message message);
 
         SavePostResponseModel SaveAnswer(Message message);
+
+        SavePostResponseModel SaveVote(ReactionModel reaction);
     }
 }

@@ -227,6 +227,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\API\PostsController.cs" />
+    <Compile Include="Controllers\API\ReactionsController.cs" />
+    <Compile Include="Controllers\Helpers\RefereeHelper.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -277,6 +279,7 @@
     <Compile Include="Models\Domain\IEntity.cs" />
     <Compile Include="Models\Domain\Post.cs" />
     <Compile Include="Models\DTOs\PostDTO.cs" />
+    <Compile Include="Models\DTOs\ReactionDTO.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Domain\Application\ApplicationDBContext.cs" />
     <Compile Include="Models\Domain\Application\ApplicationUser.cs" />

@@ -17,12 +17,12 @@ namespace SlackOverflowBot.Responders
 {
     public class AnswerResponder : IResponder
     {
-        private readonly IWebAPi webApi;
+        private readonly IWebApi webApi;
         private readonly IChatApi chatApi;
 
         public AnswerResponder(IChatApi chatApi)
         {
-            this.webApi = new WebApi();
+            this.webApi = new WebApi(ConfigurationManager.AppSettings["SlackOverflowWeb"]);
             this.chatApi = chatApi;
         }
 
@@ -38,7 +38,7 @@ namespace SlackOverflowBot.Responders
 
             if (SaveAnswer(context.Message))
             {
-                chatApi.PostMessage(ConfigurationManager.AppSettings["SlackBotApiToken"], context.Message.User.ID, "Your Question has been posted.");
+                chatApi.PostMessage(ConfigurationManager.AppSettings["SlackBotApiToken"], context.Message.User.ID, "Your reply has been posted. Thank you for the input");
                 return new BotMessage ();
             }
             chatApi.PostMessage(ConfigurationManager.AppSettings["SlackBotApiToken"], context.Message.User.ID, "There was an error posting your question.");

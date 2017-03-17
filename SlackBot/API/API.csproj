@@ -86,6 +86,7 @@
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Purpose.cs" />
     <Compile Include="Models\Reaction.cs" />
+    <Compile Include="Models\ReactionModel.cs" />
     <Compile Include="Models\Topic.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,7 +96,7 @@
     <Compile Include="UserApi\IUserApi.cs" />
     <Compile Include="UserApi\UserApi.cs" />
     <Compile Include="UserApi\UserInfoResponseModel.cs" />
-    <Compile Include="WebApi\IWebAPi.cs" />
+    <Compile Include="WebApi\IWebApi.cs" />
     <Compile Include="WebApi\SavePostResponseModel.cs" />
     <Compile Include="WebApi\WebApi.cs" />
   </ItemGroup>
