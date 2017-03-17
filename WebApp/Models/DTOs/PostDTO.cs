@@ -17,8 +17,9 @@ namespace WebApp.Models.DTOs
         [Required]
         public string SlackUserId { get; set; }
 
-        public bool IsQuestion { get; set; }
+        public byte PostTypeId { get; set; }
 
+        [Required]
         public string TimeStamp { get; set; }
     }
 }

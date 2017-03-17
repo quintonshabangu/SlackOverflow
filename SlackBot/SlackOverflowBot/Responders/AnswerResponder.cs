@@ -59,7 +59,7 @@ namespace SlackOverflowBot.Responders
             };
 
 
-            var response = webApi.SaveQuestion(message);
+            var response = webApi.SaveAnswer(message);
             return response.StatusCode == HttpStatusCode.OK;
         }
     }

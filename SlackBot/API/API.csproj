@@ -83,6 +83,7 @@
     <Compile Include="GroupsApi\GroupsListResponseModel.cs" />
     <Compile Include="GroupsApi\IGroupsApi.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\PostType.cs" />
     <Compile Include="Models\Profile.cs" />
     <Compile Include="Models\Purpose.cs" />
     <Compile Include="Models\Reaction.cs" />

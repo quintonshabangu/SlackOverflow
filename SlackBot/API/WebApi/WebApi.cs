@@ -27,7 +27,7 @@ namespace API.WebApi
             request.AddParameter("Text", message.text);
             request.AddParameter("slackUserId", message.user);
             request.AddParameter("TimeStamp", message.StringTimeStamp);
-            request.AddParameter("IsQuestion", true );
+            request.AddParameter("PostTypeId", (int)PostType.Question);
 
             IRestResponse response = client.Execute(request);
 
@@ -50,6 +50,7 @@ namespace API.WebApi
             request.AddParameter("Text", message.text);
             request.AddParameter("slackUserId", message.user);
             request.AddParameter("TimeStamp", message.StringTimeStamp);
+            request.AddParameter("PostTypeId", (int)PostType.Answer);
 
             IRestResponse response = client.Execute(request);
 

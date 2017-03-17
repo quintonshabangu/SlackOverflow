@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using WebApp.Models.Domain.ReferenceModels;
 
 namespace WebApp.Models.Domain
 {
@@ -17,11 +18,11 @@ namespace WebApp.Models.Domain
         [Required]
         public string TimeStamp { get; set; }
 
-        public Post ParentPost { get; set; }
-
         [Required]
         public string SlackUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
+
+        public PostType PostType { get; set; }
     }
 }
