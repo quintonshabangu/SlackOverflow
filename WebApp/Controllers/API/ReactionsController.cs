@@ -21,7 +21,7 @@ namespace WebApp.Controllers.API
             _context = new ApplicationDbContext();
         }
 
-        [System.Web.Mvc.HttpPost]
+        [System.Web.Http.HttpPost]
         public IHttpActionResult CreateReaction(ReactionDTO reactionDTO)
         {
             if (!ModelState.IsValid)
@@ -29,29 +29,85 @@ namespace WebApp.Controllers.API
 
             Post post = _context.Posts.SingleOrDefault(p => p.TimeStamp.Equals(reactionDTO.MessageTimeStamp));
 
-            if (post != null)
-                post.Votes = post.Votes + 1;
+            if (post != null && reactionDTO.SlackUserId != post.SlackUserId)
+            {
+                if (reactionDTO.Reaction.Equals("+1"))
+                    post.AddUpVotesToPost(1);
+                if (reactionDTO.Reaction.Equals("-1"))
+                    post.AddDownVotesToPost(1);
 
-            addPointsToUsers(post, reactionDTO.SlackUserId);
-
-            _context.SaveChanges();
+                addPointsToUsers(post, reactionDTO);
+                _context.SaveChanges();
+            }
 
             return Ok();
         }
 
-        private void addPointsToUsers(Post post, string voterSlackId)
+        private void addPointsToUsers(Post post, ReactionDTO reactionDTO)
         {
-            Points points = RefereeHelper.Instance.VoterVotedAnswerUp();
+            Points points;
 
-            var voter = _context.Users.SingleOrDefault(v => v.SlackId.Equals(voterSlackId));
+            if (reactionDTO.Reaction.Equals("+1"))
+                points = RefereeHelper.Instance.VoterVotedAnswerUp();
+            else if (reactionDTO.Reaction.Equals("-1"))
+                points = RefereeHelper.Instance.VoterVotedAnswerDown();
+            else
+                return;
+
+            var voter = _context.Users.SingleOrDefault(v => v.SlackId.Equals(reactionDTO.SlackUserId));
 
             if (voter != null)
                 voter.AddUserPoints(points.VoterPoints);
 
             //Adding points to the Original Poster
-            if (post != null || post.ApplicationUser != null)
+            if (post != null && post.ApplicationUser != null)
                 post.ApplicationUser.AddUserPoints(points.PosterPoints);
 
         }
+
+        [System.Web.Http.HttpPost]
+        public IHttpActionResult RemoveReaction(ReactionDTO reactionDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest("Model state not valid. Check parameters");
+
+            Post post = _context.Posts.SingleOrDefault(p => p.TimeStamp.Equals(reactionDTO.MessageTimeStamp));
+
+            if (post != null && reactionDTO.SlackUserId != post.SlackUserId)
+            {
+                if (reactionDTO.Reaction.Equals("+1"))
+                    post.AddUpVotesToPost(-1);
+                if (reactionDTO.Reaction.Equals("-1"))
+                    post.AddDownVotesToPost(-1);
+
+                undoAddPointsToUsers(post, reactionDTO);
+                _context.SaveChanges();
+            }
+
+            return Ok();
+        }
+
+        private void undoAddPointsToUsers(Post post, ReactionDTO reactionDTO)
+        {
+            Points points;
+
+            if (reactionDTO.Reaction.Equals("+1"))
+                points = RefereeHelper.Instance.VoterRemovedUpVote();
+            else if (reactionDTO.Reaction.Equals("-1"))
+                points = RefereeHelper.Instance.VoterRemovedDownVote();
+            else
+                return;
+
+            var voter = _context.Users.SingleOrDefault(v => v.SlackId.Equals(reactionDTO.SlackUserId));
+
+            if (voter != null)
+                voter.AddUserPoints(points.VoterPoints);
+
+            //Adding points to the Original Poster
+            if (post != null && post.ApplicationUser != null)
+                post.ApplicationUser.AddUserPoints(points.PosterPoints);
+
+        }
+
     }
 }

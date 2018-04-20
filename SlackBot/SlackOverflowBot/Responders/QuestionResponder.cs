@@ -22,14 +22,16 @@ namespace SlackOverflowBot.Responders
 
         public QuestionResponder(IChatApi chatApi)
         {
-            webApi = new WebApi(ConfigurationManager.AppSettings["SlackOverflowWeb"]);
+            this.webApi = new WebApi(ConfigurationManager.AppSettings["ServerAddress"],
+                                    ConfigurationManager.AppSettings["SlackBotApiToken"],
+                                    ConfigurationManager.AppSettings["ChannelId"]);
             this.chatApi = chatApi;
         }
 
         public bool CanRespond(ResponseContext context)
         {
             return !context.BotHasResponded &&
-                    context.Message.Text.Contains("Question:") &&
+                    context.Message.Text.Contains("q:") &&
                     context.Message.ChatHub.ID.Equals(ConfigurationManager.AppSettings["ChannelId"]);
         }
 

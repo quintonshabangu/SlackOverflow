@@ -11,7 +11,9 @@ namespace WebApp.Models.Domain
     {
         public long Id { get; set; }
 
-        public int Votes { get; set; }
+        public int UpVotes { get; set; }
+
+        public int DownVotes { get; set; }
 
         public string Text { get; set; }
 
@@ -24,5 +26,15 @@ namespace WebApp.Models.Domain
         public ApplicationUser ApplicationUser { get; set; }
 
         public PostType PostType { get; set; }
+
+        public void AddUpVotesToPost(int Votes)
+        {
+            this.UpVotes = this.UpVotes + Votes;
+        }
+
+        public void AddDownVotesToPost(int Votes)
+        {
+            this.DownVotes = this.DownVotes + Votes;
+        }
     }
 }

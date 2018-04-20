@@ -22,14 +22,16 @@ namespace SlackOverflowBot.Responders
 
         public AnswerResponder(IChatApi chatApi)
         {
-            this.webApi = new WebApi(ConfigurationManager.AppSettings["SlackOverflowWeb"]);
+            this.webApi = new WebApi(ConfigurationManager.AppSettings["ServerAddress"],
+                                    ConfigurationManager.AppSettings["SlackBotApiToken"],
+                                    ConfigurationManager.AppSettings["ChannelId"]);
             this.chatApi = chatApi;
         }
 
         public bool CanRespond(ResponseContext context)
         {
             return !context.BotHasResponded &&
-                    context.Message.Text.Contains("Answer:") &&
+                    context.Message.Text.Contains("a:") &&
                     context.Message.ChatHub.ID.Equals(ConfigurationManager.AppSettings["ChannelId"]);
         }
 
@@ -57,7 +59,6 @@ namespace SlackOverflowBot.Responders
 
                 user = slackMessage.User.ID
             };
-
 
             var response = webApi.SaveAnswer(message);
             return response.StatusCode == HttpStatusCode.OK;

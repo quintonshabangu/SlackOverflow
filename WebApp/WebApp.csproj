@@ -52,6 +52,14 @@
       <HintPath>..\packages\AutoMapper.EF6.0.2.0\lib\net45\AutoMapper.EF6.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=3.4.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Windsor.3.4.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DelegateDecompiler, Version=1.0.0.0, Culture=neutral, PublicKeyToken=93b26a10a04705bd, processorArchitecture=MSIL">
       <HintPath>..\packages\DelegateDecompiler.0.18.1\lib\net40-Client\DelegateDecompiler.dll</HintPath>
       <Private>True</Private>
@@ -226,6 +234,8 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\API\AccountController.cs" />
+    <Compile Include="Controllers\API\OwinExtextions.cs" />
     <Compile Include="Controllers\API\PostsController.cs" />
     <Compile Include="Controllers\API\ReactionsController.cs" />
     <Compile Include="Controllers\Helpers\RefereeHelper.cs" />
@@ -234,6 +244,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IoC\ControllersInstaller.cs" />
+    <Compile Include="IoC\IDbContext.cs" />
+    <Compile Include="IoC\PersistanceInstaller.cs" />
+    <Compile Include="IoC\WindsorControllerFactory.cs" />
     <Compile Include="MappingProfiles\PostMappingProfile.cs" />
     <Compile Include="Migrations\201703141053480_InitialMigration.cs" />
     <Compile Include="Migrations\201703141053480_InitialMigration.Designer.cs">
@@ -287,17 +301,37 @@
     <Compile Include="Migrations\201703171103598_RemoveParentPostAttribute.Designer.cs">
       <DependentUpon>201703171103598_RemoveParentPostAttribute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703201057145_AddSpecificVoteTypeCounters.cs" />
+    <Compile Include="Migrations\201703201057145_AddSpecificVoteTypeCounters.Designer.cs">
+      <DependentUpon>201703201057145_AddSpecificVoteTypeCounters.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domain\IEntity.cs" />
     <Compile Include="Models\Domain\Post.cs" />
     <Compile Include="Models\Domain\ReferenceModels\IReferenceModel.cs" />
     <Compile Include="Models\Domain\ReferenceModels\PostType.cs" />
+    <Compile Include="Models\Domain\Team.cs" />
     <Compile Include="Models\DTOs\PostDTO.cs" />
     <Compile Include="Models\DTOs\ReactionDTO.cs" />
-    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\ViewModels\AddPhoneNumberViewModel.cs" />
+    <Compile Include="Models\ViewModels\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="Models\ViewModels\FactorViewModel.cs" />
+    <Compile Include="Models\ViewModels\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\Domain\Application\ApplicationDBContext.cs" />
     <Compile Include="Models\Domain\Application\ApplicationUser.cs" />
-    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
+    <Compile Include="Models\ViewModels\ExternalLoginConfirmationViewModel.cs" />
+    <Compile Include="Models\ViewModels\ExternalLoginListViewModel.cs" />
+    <Compile Include="Models\ViewModels\ForgotViewModel.cs" />
+    <Compile Include="Models\ViewModels\IndexVIewModel.cs" />
+    <Compile Include="Models\ViewModels\LoginViewModel.cs" />
+    <Compile Include="Models\ViewModels\ManageLoginsViewModel.cs" />
+    <Compile Include="Models\ViewModels\RegisterViewModel.cs" />
+    <Compile Include="Models\ViewModels\ResetPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\SendCodeViewModel.cs" />
+    <Compile Include="Models\ViewModels\SetPasswordViewModel.cs" />
+    <Compile Include="Models\ViewModels\VerifyCodeViewModel.cs" />
+    <Compile Include="Models\ViewModels\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -362,6 +396,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="obj\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -410,6 +445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703171103598_RemoveParentPostAttribute.resx">
       <DependentUpon>201703171103598_RemoveParentPostAttribute.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201057145_AddSpecificVoteTypeCounters.resx">
+      <DependentUpon>201703201057145_AddSpecificVoteTypeCounters.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

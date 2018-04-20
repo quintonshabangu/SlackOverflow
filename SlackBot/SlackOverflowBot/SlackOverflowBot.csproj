@@ -91,6 +91,7 @@
     <Compile Include="Responders\AnswerResponder.cs" />
     <Compile Include="Responders\QuestionResponder.cs" />
     <Compile Include="Responders\ReactionResponder.cs" />
+    <Compile Include="Responders\RegistrationResponder.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

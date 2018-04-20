@@ -30,7 +30,9 @@ namespace SlackOverflowBot.Responders
 
         private ReactionResponder()
         {
-            webApi = new WebApi(ConfigurationManager.AppSettings["SlackOverflowWeb"]);
+            this.webApi = new WebApi(ConfigurationManager.AppSettings["ServerAddress"],
+                                    ConfigurationManager.AppSettings["SlackBotApiToken"],
+                                    ConfigurationManager.AppSettings["ChannelId"]);
         }
 
         public void HandleVotes(Bot bot)
@@ -42,6 +44,11 @@ namespace SlackOverflowBot.Responders
                 if (reaction.Type.Equals("reaction_added"))
                 {
                     webApi.SaveVote(reaction);
+                }
+
+                if (reaction.Type.Equals("reaction_removed"))
+                {
+                    webApi.RemoveVote(reaction);
                 }
             };
         }

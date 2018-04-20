@@ -52,6 +52,16 @@ namespace WebApp.Controllers.Helpers
             return getPoints(PointChangeType.VoterVotedAnswerDown);
         }
 
+        public Points VoterRemovedUpVote()
+        {
+            return getPoints(PointChangeType.VoterRemovedUpVote);
+        }
+
+        public Points VoterRemovedDownVote()
+        {
+            return getPoints(PointChangeType.VoterRemovedDownVote);
+        }
+
         private Points getPoints(PointChangeType Type)
         {
             switch (Type)
@@ -73,7 +83,10 @@ namespace WebApp.Controllers.Helpers
 
                 case PointChangeType.VoterVotedAnswerDown:
                     return new Points(-1, 1);
-
+                case PointChangeType.VoterRemovedUpVote:
+                    return new Points(-1, -1);
+                case PointChangeType.VoterRemovedDownVote:
+                    return new Points(1, 0);
                 default:
                     return new Points(0, 0);
             }
@@ -108,5 +121,8 @@ namespace WebApp.Controllers.Helpers
         // Affects answerer and Voter
         VoterVotedAnswerUp,
         VoterVotedAnswerDown,
+
+        VoterRemovedUpVote,
+        VoterRemovedDownVote,
     }
 }

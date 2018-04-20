@@ -17,4 +17,5 @@ namespace WebApp.Models.DTOs
         [Required]
         public string MessageTimeStamp { get; set; }
     }
+
 }

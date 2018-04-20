@@ -10,5 +10,9 @@ namespace API.WebApi
         SavePostResponseModel SaveAnswer(Message message);
 
         SavePostResponseModel SaveVote(ReactionModel reaction);
+
+        SavePostResponseModel RemoveVote(ReactionModel reaction);
+
+        bool RegisterUser(string slackId);
     }
 }
